@@ -4,13 +4,25 @@ on:
     push: 
         branches: 
             - main 
+            - test 
+
+    pull_request: 
+        branches: 
+            - main
             - test
 
 
 jobs: 
     on-push: 
+        if: github.event_name == 'push'
         runs-on: ubuntu-latest 
         steps: 
             - name: "Will run on main push" 
-              run: echo "Hello world"  
+              run: echo "Latest changes from local repo has been pushed"  
 
+    on-pull-request: 
+        if: github.event_name == 'pull_request'
+        runs-on: ubuntu-latest
+        steps: 
+            - name: "Will run on main pull request"
+              run: echo "Latest changes from remote repo has been pulled"
